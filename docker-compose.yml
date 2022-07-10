@@ -22,7 +22,7 @@ services:
     build:
       context: prisma
     depends_on:
-      - postgres
+      - quadro_db
     environment:
       DATABASE_URL: ${DATABASE_URL}
 
