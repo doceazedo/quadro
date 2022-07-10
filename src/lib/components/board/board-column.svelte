@@ -1,9 +1,4 @@
-<script lang="ts">
-  export let title = '';
-</script>
-
 <div class="column">
-  <h1 class="column-name">{title}</h1>
   <slot />
 </div>
 
@@ -20,10 +15,4 @@
     border: 1px solid rgba(#fff, .2)
     border-radius: 1rem
     backdrop-filter: blur(.5rem)
-
-    .column-name
-      color: #fff
-      font-weight: 700
-      font-size: 1.25rem
-      margin-bottom: .5rem
 </style>
