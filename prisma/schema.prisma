@@ -14,7 +14,7 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  token    String
+  token    String @unique
   name     String
   boards   Board[]
 }
