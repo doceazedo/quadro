@@ -1,2 +1,17 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts" context="module">
+  import type { Load } from '@sveltejs/kit';
+
+  export const load: Load = ({ session }) => {
+    return {
+      props: session,
+    };
+  };
+</script>
+
+<script lang="ts">
+  import type { User } from '@prisma/client';
+
+  export let user: User | null;
+</script>
+
+<pre>{JSON.stringify(user, null, 2)}</pre>
