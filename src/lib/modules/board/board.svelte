@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { BOARD } from './board.store';
   import {
     BoardCardAdd,
     BoardCard,
@@ -8,11 +9,16 @@
   } from '$lib/components/board';
 </script>
 
-<Board>
-  <BoardColumn>
-    <BoardCard />
-    <BoardCardAdd />
-  </BoardColumn>
-
-  <BoardColumnAdd />
-</Board>
+{#if $BOARD}
+  <Board>
+    {#each $BOARD.columns as column}
+      <BoardColumn>
+        {#each column.cards as card}
+          <BoardCard title={card.title} body={card.body} />
+        {/each}
+        <BoardCardAdd />
+      </BoardColumn>
+      <BoardColumnAdd />
+    {/each}
+  </Board>
+{/if}
