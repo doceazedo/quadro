@@ -9,7 +9,6 @@ const prisma = new PrismaClient();
 const schema = object({
   email: string().email().required(),
   password: string().required(),
-  name: string().required(),
 })
   .noUnknown()
   .strict();
@@ -20,35 +19,36 @@ export const post: RequestHandler = async ({ request }) => {
   const [data, error] = await validate<User>(schema, request);
   if (error) return error;
 
-  const existingUser = await prisma.user.findUnique({
+  const password = hashPassword(data!.password);
+  const user = await prisma.user.findUnique({
     where: {
       email: data!.email,
     },
   });
-  if (existingUser)
+
+  if (!user || user.password != password)
     return {
-      status: 409,
+      status: 403,
       body: {
-        message: 'this email already exists',
+        message: 'email or password are invalid',
       },
     };
 
   const token = uuidv4();
-  const password = hashPassword(data!.password);
-  await prisma.user.create({
-    data: {
-      name: data!.name,
+  const headers = setCookieHeaders(token);
+  await prisma.user.update({
+    where: {
       email: data!.email,
-      password,
+    },
+    data: {
       token,
     },
   });
-  const headers = setCookieHeaders(token);
 
   return {
     headers,
     body: {
-      message: 'registered successfully',
+      message: 'logged in successfully',
     },
   };
 };
