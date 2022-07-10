@@ -14,5 +14,5 @@
     background-color: rgba(#fff, .1)
     border: 1px solid rgba(#fff, .2)
     border-radius: 1rem
-    backdrop-filter: blur(.5rem)
+    user-select: none
 </style>

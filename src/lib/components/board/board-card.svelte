@@ -1,16 +1,41 @@
 <script lang="ts">
-  export let title = '',
+  export let dropzone: HTMLDivElement | null = null,
+    draggable: HTMLDivElement | null = null,
+    x = 0,
+    y = 0,
+    columnId: number,
+    position: number,
+    title = '',
     body = '';
+
+  $: dragging = x != 0 || y != 0;
 </script>
 
-<div class="card">
-  <h1>{title}</h1>
-  {#if body}
-    <p>{body}</p>
-  {/if}
+<div
+  class="card-wrapper"
+  class:dragging
+  bind:this={dropzone}
+  data-position={position}
+  data-column-id={columnId}
+>
+  <div
+    class="card draggable"
+    bind:this={draggable}
+    style="transform:translate({x}px, {y}px)"
+    data-position={position}
+    data-column-id={columnId}
+  >
+    <h1>{title}</h1>
+    {#if body}
+      <p>{body}</p>
+    {/if}
+  </div>
 </div>
 
 <style lang="sass">
+  .card-wrapper
+    transition: all .2s ease
+
   .card
     display: flex
     flex-direction: column

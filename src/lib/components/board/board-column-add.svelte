@@ -2,11 +2,16 @@
   import { AddIcon } from '$lib/components/icons';
 </script>
 
-<button class="column-add" on:click>
-  <AddIcon /> New column
-</button>
+<div class="card-wrapper">
+  <button class="column-add" on:click>
+    <AddIcon /> New column
+  </button>
+</div>
 
 <style lang="sass">
+  .card-wrapper
+    transition: all .2s ease
+
   .column-add
     display: flex
     justify-content: center
