@@ -9,3 +9,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String
+  password String
+  token    String
+  name     String
+  boards   Board[]
+}
+
+model Board {
+  id      Int      @id @default(autoincrement())
+  title   String
+  owner   User     @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  columns Column[]
+}
+
+model Column {
+  id      Int    @id @default(autoincrement())
+  title   String
+  board   Board  @relation(fields: [boardId], references: [id])
+  boardId Int
+  cards   Card[]
+}
+
+model Card {
+  id       Int    @id @default(autoincrement())
+  title    String
+  body     String
+  column   Column @relation(fields: [columnId], references: [id])
+  columnId Int
+}
