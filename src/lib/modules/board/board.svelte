@@ -1,12 +1,7 @@
 <script lang="ts">
   import { BOARD } from './board.store';
-  import {
-    BoardCardAdd,
-    BoardCard,
-    BoardColumn,
-    Board,
-  } from '$lib/components/board';
-  import { BoardColumnAdd } from '.';
+  import { BoardCard, BoardColumn, Board } from '$lib/components/board';
+  import { BoardCardAdd, BoardColumnAdd } from '.';
 </script>
 
 {#if $BOARD}
@@ -16,7 +11,7 @@
         {#each column.cards as card}
           <BoardCard title={card.title} body={card.body} />
         {/each}
-        <BoardCardAdd />
+        <BoardCardAdd columnId={column.id} />
       </BoardColumn>
     {/each}
     <BoardColumnAdd />
