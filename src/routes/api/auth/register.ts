@@ -8,7 +8,7 @@ import type { InferType } from 'yup';
 const prisma = new PrismaClient();
 const schema = object({
   email: string().email().required(),
-  password: string().required(),
+  password: string().min(6).required(),
   name: string().required(),
 })
   .noUnknown()
@@ -35,7 +35,7 @@ export const post: RequestHandler = async ({ request }) => {
 
   const token = uuidv4();
   const password = hashPassword(data!.password);
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       name: data!.name,
       email: data!.email,
@@ -44,6 +44,13 @@ export const post: RequestHandler = async ({ request }) => {
     },
   });
   const headers = setCookieHeaders(token);
+
+  await prisma.board.create({
+    data: {
+      title: 'My first board',
+      ownerId: user.id,
+    },
+  });
 
   return {
     headers,
