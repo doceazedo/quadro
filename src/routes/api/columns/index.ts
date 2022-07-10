@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { number, object, string } from 'yup';
-import { validate } from '$lib/utils';
+import { getFullBoard, validate } from '$lib/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { InferType } from 'yup';
 
@@ -32,11 +32,13 @@ export const post: RequestHandler = async ({ request }) => {
       },
     };
 
-  const column = await prisma.column.create({
+  await prisma.column.create({
     data: data!,
   });
 
+  const updatedBoard = await getFullBoard(prisma, data!.boardId);
+
   return {
-    body: column,
+    body: updatedBoard,
   };
 };

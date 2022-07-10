@@ -1,5 +1,9 @@
+<script lang="ts">
+  export let title = '';
+</script>
+
 <div class="column">
-  <h1 class="column-name">Column ✨</h1>
+  <h1 class="column-name">{title}</h1>
   <slot />
 </div>
 

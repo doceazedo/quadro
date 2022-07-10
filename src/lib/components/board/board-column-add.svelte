@@ -2,7 +2,9 @@
   import { AddIcon } from '$lib/components/icons';
 </script>
 
-<div class="column-add"><AddIcon /> New column</div>
+<button class="column-add" on:click>
+  <AddIcon /> New column
+</button>
 
 <style lang="sass">
   .column-add

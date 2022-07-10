@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store';
 import { USER } from '$lib/modules/auth';
-import { setUserBoard } from './board.clients';
+import { setUserBoard } from './board.client';
 import type { Board, Card, Column } from '@prisma/client';
 
 type ColumnWithCards = {
