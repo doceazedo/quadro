@@ -12,11 +12,11 @@ const jsonError = 'invalid json request';
 
 export const validate = async <T>(
   schema: AnyObjectSchema,
-  request: Request,
+  request: Request | object,
 ): Promise<[T | null, ErrorResponse | null]> => {
   let data;
   try {
-    data = await request.json();
+    data = request instanceof Request ? await request.json() : request;
   } catch (error) {
     return [
       null,
