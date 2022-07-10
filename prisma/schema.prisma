@@ -28,11 +28,12 @@ model Board {
 }
 
 model Column {
-  id      Int    @id @default(autoincrement())
-  title   String
-  board   Board  @relation(fields: [boardId], references: [id])
-  boardId Int
-  cards   Card[]
+  id       Int    @id @default(autoincrement())
+  title    String
+  board    Board  @relation(fields: [boardId], references: [id])
+  boardId  Int
+  position Int    @default(0)
+  cards    Card[]
 }
 
 model Card {
@@ -40,5 +41,6 @@ model Card {
   title    String
   body     String
   column   Column @relation(fields: [columnId], references: [id])
+  position Int    @default(0)
   columnId Int
 }
