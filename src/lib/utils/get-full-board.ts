@@ -14,10 +14,12 @@ export const getFullBoard = async (client: PrismaClient, id: number) => {
     },
   });
 
-  board!.columns = board!.columns.map((column) => ({
-    ...column,
-    cards: column.cards.sort((a, b) => a.position - b.position),
-  }));
+  board!.columns = board!.columns
+    .map((column) => ({
+      ...column,
+      cards: column.cards.sort((a, b) => a.position - b.position),
+    }))
+    .sort((a, b) => a.position - b.position);
 
   return board;
 };

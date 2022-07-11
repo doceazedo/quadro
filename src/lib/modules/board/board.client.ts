@@ -56,3 +56,16 @@ export const reorderCard = async (cardChanges: CardChanges) => {
     return null;
   }
 };
+
+export const updateColumn = async (id: number, title: string) => {
+  try {
+    const resp = await fetch(`${baseUrl}/columns/${id}`, {
+      method: 'put',
+      body: JSON.stringify({ title }),
+    });
+    const data = await resp.json();
+    if (resp.ok) BOARD.set(data);
+  } catch (error) {
+    return null;
+  }
+};
