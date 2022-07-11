@@ -1,4 +1,4 @@
-import sha256 from 'crypto-js/sha256';
+import sha256 from 'crypto-js/sha256.js';
 import 'dotenv/config';
 
 const salt = process.env.PASSWORD_SALT;

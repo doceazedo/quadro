@@ -1,5 +1,5 @@
 <script lang="ts">
-  import md5 from 'crypto-js/md5';
+  import md5 from 'crypto-js/md5.js';
   import { Topbar } from '$lib/components/topbar';
   import { BOARD } from '$lib/modules/board';
   import { USER } from '$lib/modules/auth';
