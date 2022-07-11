@@ -24,4 +24,4 @@ Then run Docker compose:
 docker-compose up --build
 ```
 
-The app will be available at http://localhost:3000.
+The app will be available at http://localhost:3000/auth/login.
