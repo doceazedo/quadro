@@ -1,13 +1,24 @@
 <script lang="ts">
-  export let value = '';
+  export let value = '',
+    dropzone: HTMLFormElement | null = null,
+    columnId: number,
+    position: number;
 </script>
 
-<form on:submit|preventDefault>
+<form
+  on:submit|preventDefault
+  bind:this={dropzone}
+  data-position={position}
+  data-column-id={columnId}
+>
   <input type="text" class="card-add" placeholder="New card..." bind:value />
 </form>
 
 <style lang="sass">
   @import '../../sass/vars'
+
+  form
+    transition: all .2s ease
 
   .card-add
     width: 100%
