@@ -19,7 +19,9 @@
             />
           {/key}
         {/each}
-        <BoardCardAdd columnId={column.id} />
+        {#key column.cards.length}
+          <BoardCardAdd columnId={column.id} position={column.cards.length} />
+        {/key}
       </BoardColumn>
     {/each}
     <BoardColumnAdd />
